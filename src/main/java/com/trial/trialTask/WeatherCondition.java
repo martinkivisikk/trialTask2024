@@ -1,22 +1,27 @@
 package com.trial.trialTask;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "weatherData")
 public class WeatherCondition {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name="weatherStation")
     private String weatherStation;
+    @Column(name="WMOcode")
     private int WMOcode;
+    @Column(name="airTemperature")
     private double airTemperature;
+    @Column(name="windSpeed")
     private double windSpeed;
+    @Column(name="phenomenon")
     private String weatherPhenomenon;
+    @Column(name="time")
     private LocalDateTime timeStamp;
 
     public WeatherCondition() {
