@@ -11,17 +11,17 @@ public class WeatherCondition {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name="weatherStation")
+    @Column(name = "weatherStation")
     private String weatherStation;
-    @Column(name="WMOcode")
+    @Column(name = "WMOcode")
     private int WMOcode;
-    @Column(name="airTemperature")
+    @Column(name = "airTemperature")
     private double airTemperature;
-    @Column(name="windSpeed")
+    @Column(name = "windSpeed")
     private double windSpeed;
-    @Column(name="phenomenon")
+    @Column(name = "phenomenon")
     private String weatherPhenomenon;
-    @Column(name="time")
+    @Column(name = "time")
     private LocalDateTime timeStamp;
 
     public WeatherCondition() {
