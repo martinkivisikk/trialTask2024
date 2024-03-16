@@ -18,7 +18,8 @@ public class Controller {
 
     /**
      * Example request: localhost:8080/get?city=Tallinn&vehicleType=Bike -> 3.5
-     * @param city provided city
+     *
+     * @param city        provided city
      * @param vehicleType provided vehicle type
      * @return total delivery fee or forbid delivery
      */
@@ -30,9 +31,13 @@ public class Controller {
         Optional<WeatherCondition> latestWeatherData = weatherConditionRepository.findTopByWeatherStationOrderByTimeStampDesc(cityStationMap.get(city));
 
         //Save the necessary information
-        double airTemperature = latestWeatherData.get().getAirTemperature();
-        double windSpeed = latestWeatherData.get().getWindSpeed();
-        String phenomenon = latestWeatherData.get().getWeatherPhenomenon();
+        double airTemperature, windSpeed;
+        String phenomenon;
+        if (latestWeatherData.isPresent()) {
+            airTemperature = latestWeatherData.get().getAirTemperature();
+            windSpeed = latestWeatherData.get().getWindSpeed();
+            phenomenon = latestWeatherData.get().getWeatherPhenomenon();
+        } else return ResponseEntity.badRequest().body("Couldn't get weather data.");
 
         //Calculate fees based on provided data
         double regionalBaseFee = feeCalculationService.getRegionalBaseFee(city, vehicleType);

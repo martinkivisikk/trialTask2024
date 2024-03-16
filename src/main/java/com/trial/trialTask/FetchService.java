@@ -1,6 +1,5 @@
 package com.trial.trialTask;
 
-import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -40,7 +39,7 @@ public class FetchService {
      */
     @Scheduled(cron = "${cron.expression}")
     //@PostConstruct
-    public void fetchDataAndSave() throws IOException, ParserConfigurationException {
+    public void fetchDataAndSave() {
         RestTemplate restTemplate = new RestTemplate();
         String xmlData = restTemplate.getForObject("https://www.ilmateenistus.ee/ilma_andmed/xml/observations.php", String.class);
         List<String> requiredStations = new ArrayList<>();
@@ -54,7 +53,7 @@ public class FetchService {
             saveWeatherData(document, requiredStations, instant);
 
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Couldn't save weather data.");
         }
     }
 
